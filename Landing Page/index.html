@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AffiliatePro - Product Showcase</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      :root {
+        --primary: #4361ee;
+        --secondary: #3a0ca3;
+        --accent: #f72585;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gray: #6c757d;
+        --success: #4cc9f0;
+        --transition: all 0.3s ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: #f5f7ff;
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1.5rem 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo i {
+        margin-right: 10px;
+        color: var(--accent);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 1.5rem;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+        padding: 5px 10px;
+        border-radius: 4px;
+      }
+
+      nav ul li a:hover {
+        color: var(--accent);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        padding: 4rem 0;
+        background: linear-gradient(
+          rgba(67, 97, 238, 0.05),
+          rgba(58, 12, 163, 0.05)
+        );
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--secondary);
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        color: var(--gray);
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(247, 37, 133, 0.4);
+      }
+
+      /* Filter Section */
+      .filter-section {
+        padding: 1.5rem 0;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+      }
+
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 8px 20px;
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: 500;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      /* Products Grid */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: var(--accent);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+      }
+
+      .product-category {
+        color: var(--primary);
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .product-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: var(--dark);
+      }
+
+      .product-description {
+        color: var(--gray);
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .product-price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--secondary);
+        margin-bottom: 15px;
+      }
+
+      .product-actions {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+        flex: 1;
+        margin-right: 10px;
+      }
+
+      .btn-primary:hover {
+        background: var(--secondary);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        width: 45px;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(67, 97, 238, 0.1);
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 4rem 0;
+        background: white;
+        margin: 3rem 0;
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: var(--secondary);
+      }
+
+      .about-text p {
+        margin-bottom: 1.5rem;
+        color: var(--gray);
+      }
+
+      .about-image {
+        flex: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        padding: 4rem 0;
+        background: linear-gradient(
+          rgba(67, 97, 238, 0.03),
+          rgba(58, 12, 163, 0.03)
+        );
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 3rem;
+        color: var(--secondary);
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .testimonial-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 1.5rem;
+        color: var(--gray);
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1rem;
+      }
+
+      .author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .author-info h4 {
+        margin-bottom: 5px;
+      }
+
+      .author-info p {
+        color: var(--gray);
+        font-size: 0.9rem;
+      }
+
+      /* Newsletter */
+      .newsletter {
+        padding: 4rem 0;
+        background: var(--primary);
+        color: white;
+        text-align: center;
+      }
+
+      .newsletter h2 {
+        margin-bottom: 1rem;
+      }
+
+      .newsletter p {
+        max-width: 600px;
+        margin: 0 auto 2rem;
+      }
+
+      .newsletter-form {
+        display: flex;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .newsletter-input {
+        flex: 1;
+        padding: 12px 15px;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        font-size: 1rem;
+      }
+
+      .newsletter-button {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 0 25px;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+        font-weight: 600;
+        transition: var(--transition);
+      }
+
+      .newsletter-button:hover {
+        background: #e20c73;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 3rem 0 1.5rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent);
+      }
+
+      .footer-column p {
+        margin-bottom: 1rem;
+        color: #adb5bd;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-links a {
+        color: #adb5bd;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background: var(--accent);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #adb5bd;
+        font-size: 0.9rem;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--accent);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        z-index: 99;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background: #e20c73;
+        transform: translateY(-3px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        nav ul {
+          margin-top: 1rem;
+          justify-content: center;
+        }
+
+        nav ul li {
+          margin: 0 0.75rem;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        .about-content {
+          flex-direction: column;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .newsletter-input {
+          border-radius: 4px;
+          margin-bottom: 10px;
+        }
+
+        .newsletter-button {
+          border-radius: 4px;
+          padding: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .filter-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .filter-btn {
+          width: 80%;
+          margin-bottom: 10px;
+        }
+
+        .testimonial-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <i class="fas fa-store"></i>
+            AffiliatePro
+          </div>
+          <nav>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <h1>Discover Amazing Products</h1>
+        <p>
+          Explore our curated selection of high-quality products with exclusive
+          affiliate deals. Find exactly what you need at the best prices.
+        </p>
+        <a href="#products" class="cta-button"
+          >Explore Products <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+      <div class="container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">
+              All Products
+            </button>
+            <button class="filter-btn" data-filter="electronics">
+              Electronics
+            </button>
+            <button class="filter-btn" data-filter="home">
+              Home & Kitchen
+            </button>
+            <button class="filter-btn" data-filter="fashion">Fashion</button>
+            <button class="filter-btn" data-filter="health">
+              Health & Fitness
+            </button>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card" data-category="electronics">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="Wireless Headphones"
+              />
+              <span class="product-badge">Bestseller</span>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Electronics</div>
+              <h3 class="product-title">Premium Wireless Headphones</h3>
+              <p class="product-description">
+                Experience crystal-clear sound with our noise-cancelling
+                wireless headphones. Perfect for music lovers and professionals
+                alike.
+              </p>
+              <div class="product-price">$129.99</div>
+              <div class="product-actions">
+                <button class="btn btn-primary">Buy Now</button>
+                <button class="btn btn-secondary">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card" data-category="home">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="Smart Coffee Maker"
+              />
+              <span class="product-badge">New</span>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Home & Kitchen</div>
+              <h3 class="product-title">Smart Coffee Maker</h3>
+              <p class="product-description">
+                Brew the perfect cup every time with this programmable coffee
+                maker. Connect via app for customized brewing schedules.
+              </p>
+              <div class="product-price">$89.99</div>
+              <div class="product-actions">
+                <button class="btn btn-primary">Buy Now</button>
+                <button class="btn btn-secondary">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card" data-category="fashion">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="Casual Sneakers"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Fashion</div>
+              <h3 class="product-title">Comfort Casual Sneakers</h3>
+              <p class="product-description">
+                Step out in style with these comfortable and durable sneakers.
+                Perfect for everyday wear with any outfit.
+              </p>
+              <div class="product-price">$59.99</div>
+              <div class="product-actions">
+                <button class="btn btn-primary">Buy Now</button>
+                <button class="btn btn-secondary">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card" data-category="health">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="Fitness Tracker"
+              />
+              <span class="product-badge">Sale</span>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Health & Fitness</div>
+              <h3 class="product-title">Advanced Fitness Tracker</h3>
+              <p class="product-description">
+                Monitor your health metrics with this advanced fitness tracker.
+                Tracks steps, heart rate, sleep, and more.
+              </p>
+              <div class="product-price">
+                $79.99
+                <span
+                  style="
+                    text-decoration: line-through;
+                    color: var(--gray);
+                    font-size: 1rem;
+                  "
+                  >$99.99</span
+                >
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary">Buy Now</button>
+                <button class="btn btn-secondary">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card" data-category="electronics">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="Smartphone"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Electronics</div>
+              <h3 class="product-title">Latest Smartphone</h3>
+              <p class="product-description">
+                Stay connected with the latest smartphone featuring advanced
+                camera, long battery life, and powerful performance.
+              </p>
+              <div class="product-price">$699.99</div>
+              <div class="product-actions">
+                <button class="btn btn-primary">Buy Now</button>
+                <button class="btn btn-secondary">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card" data-category="home">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="Air Purifier"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Home & Kitchen</div>
+              <h3 class="product-title">HEPA Air Purifier</h3>
+              <p class="product-description">
+                Breathe cleaner air with this HEPA air purifier that removes
+                99.97% of airborne particles for a healthier home environment.
+              </p>
+              <div class="product-price">$149.99</div>
+              <div class="product-actions">
+                <button class="btn btn-primary">Buy Now</button>
+                <button class="btn btn-secondary">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>Why Choose Our Products?</h2>
+            <p>
+              At AffiliatePro, we carefully select each product to ensure it
+              meets our high standards for quality, value, and customer
+              satisfaction. Our team tests and reviews every item before adding
+              it to our collection.
+            </p>
+            <p>
+              We partner with trusted brands and manufacturers to bring you the
+              best products at competitive prices. Our affiliate relationships
+              allow us to offer exclusive deals you won't find elsewhere.
+            </p>
+            <p>
+              Whether you're looking for the latest tech gadgets, home
+              essentials, or fitness equipment, we've got you covered with
+              products that deliver on their promises.
+            </p>
+          </div>
+          <div class="about-image">
+            <img
+              src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              alt="About Us"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "I've purchased several products through AffiliatePro and have
+              been impressed with every single one. The quality is exceptional
+              and the prices are unbeatable!"
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  alt="Sarah Johnson"
+                />
+              </div>
+              <div class="author-info">
+                <h4>Sarah Johnson</h4>
+                <p>Verified Customer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "The fitness tracker I bought has completely changed my workout
+              routine. The accuracy and features are impressive, especially at
+              this price point."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="Michael Chen"
+                />
+              </div>
+              <div class="author-info">
+                <h4>Michael Chen</h4>
+                <p>Fitness Enthusiast</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "As a tech enthusiast, I'm always looking for the latest gadgets.
+              AffiliatePro consistently has the best deals on high-quality
+              electronics."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img
+                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  alt="Jessica Martinez"
+                />
+              </div>
+              <div class="author-info">
+                <h4>Jessica Martinez</h4>
+                <p>Tech Blogger</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="contact">
+      <div class="container">
+        <h2>Stay Updated with Our Latest Deals</h2>
+        <p>
+          Subscribe to our newsletter and be the first to know about new
+          products, exclusive offers, and special promotions.
+        </p>
+        <form class="newsletter-form">
+          <input
+            type="email"
+            class="newsletter-input"
+            placeholder="Your email address"
+            required
+          />
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>About AffiliatePro</h3>
+            <p>
+              We connect you with the best products and deals through our
+              affiliate partnerships. Our goal is to help you make informed
+              purchasing decisions.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Shipping Info</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i></p>
+            <p><i class="fas fa-phone"></i> (234) 708-6969</p>
+            <p><i class="fas fa-envelope"></i> dannyboy54321321@gmail.com</p>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2023 AffiliatePro. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+      <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+      // Filter functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const productCards = document.querySelectorAll(".product-card");
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            // Add active class to clicked button
+            button.classList.add("active");
+
+            const filterValue = button.getAttribute("data-filter");
+
+            productCards.forEach((card) => {
+              if (
+                filterValue === "all" ||
+                card.getAttribute("data-category") === filterValue
+              ) {
+                card.style.display = "block";
+                setTimeout(() => {
+                  card.style.opacity = "1";
+                  card.style.transform = "translateY(0)";
+                }, 50);
+              } else {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                setTimeout(() => {
+                  card.style.display = "none";
+                }, 300);
+              }
+            });
+          });
+        });
+
+        // Add to favorites functionality
+        const favoriteButtons = document.querySelectorAll(".btn-secondary");
+        favoriteButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            this.classList.toggle("active");
+            const icon = this.querySelector("i");
+
+            if (this.classList.contains("active")) {
+              icon.classList.remove("fa-heart");
+              icon.classList.add("fa-heart", "fas", "active");
+              this.style.background = "var(--accent)";
+              this.style.borderColor = "var(--accent)";
+              this.style.color = "white";
+            } else {
+              icon.classList.remove("active");
+              this.style.background = "transparent";
+              this.style.borderColor = "var(--primary)";
+              this.style.color = "var(--primary)";
+            }
+          });
+        });
+
+        // Buy Now button functionality
+        const buyButtons = document.querySelectorAll(".btn-primary");
+        buyButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const productTitle =
+              this.closest(".product-card").querySelector(
+                ".product-title"
+              ).textContent;
+            alert(`Redirecting to purchase: ${productTitle}`);
+            // In a real implementation, this would redirect to the affiliate link
+          });
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector(".back-to-top");
+
+        window.addEventListener("scroll", () => {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add("visible");
+          } else {
+            backToTopButton.classList.remove("visible");
+          }
+        });
+
+        backToTopButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector(".newsletter-form");
+        newsletterForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const email = newsletterForm.querySelector("input").value;
+          alert(`Thank you for subscribing with: ${email}`);
+          newsletterForm.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll("nav a").forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
